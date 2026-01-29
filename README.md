@@ -7,7 +7,7 @@ This repository contains the practical labs (TPs) and source code for the **Para
 ### `TP1/`
 Contains the source code, scripts, and documentation for the first lab session:
 * **`ex1.c`**: Examining multipple strides in the code.
-* ** `ex2.c`**: Implementations of standard and optimized matrix multiplication.
+* **`ex2.c`**: Implementations of standard and optimized matrix multiplication.
 * **`mxm_bloc.c`**: Blocked matrix multiplication for cache optimization analysis.
 * **`memory_debug_modif.c`**: Modified code with corrected memory management, verified clean using Valgrind (no memory leaks).
 * **`run_hpl_single_core_full.sh`**: Bash script to automate HPL benchmarks on a single core.
