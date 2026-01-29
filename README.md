@@ -13,8 +13,5 @@ Contains the source code, scripts, and documentation for the first lab session:
 * **`run_hpl_single_core_full.sh`**: Bash script to automate HPL benchmarks on a single core.
 * **`TP1_HPC_LABZAE_Kawtar.pdf`**: The detailed lab report analyzing the results.
 
-## Overview
-The goal of this work is to analyze CPU performance, implement cache-friendly algorithms (like loop tiling), and compare measured performance against theoretical hardware limits using tools like the HPL benchmark.
-
 ---
 **Author:** Kawtar Labzae
