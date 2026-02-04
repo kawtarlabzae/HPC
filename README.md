@@ -13,5 +13,12 @@ Contains the source code, scripts, and documentation for the first lab session:
 * **`run_hpl_single_core_full.sh`**: Bash script to automate HPL benchmarks on a single core.
 * **`TP1_HPC_LABZAE_Kawtar.pdf`**: The detailed lab report analyzing the results.
 
+### `TP2/`
+Focuses on  Loop Optimizations,  Instruction Scheduling, performance analysis, and understanding scalability laws (Amdahl vs. Gustafson).
+* **`TP2_Report.pdf`**: Comprehensive report containing speedup curves, Valgrind/Callgrind analysis, and theoretical scaling comparisons.
+* **`ex2_opt.c` / `ex2_orig.c`**: Solution odes for ex2.
+* **`bench_ex1.c` / `ex1_generic.c` **: Solution codes for ex1.
+* **`ex3.c`**: Solution odes for ex3.
+* **`ex4.c`**: Solution odes for ex4.
 ---
 **Author:** Kawtar Labzae
