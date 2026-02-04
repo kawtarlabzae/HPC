@@ -17,7 +17,7 @@ Contains the source code, scripts, and documentation for the first lab session:
 Focuses on  Loop Optimizations,  Instruction Scheduling, performance analysis, and understanding scalability laws (Amdahl vs. Gustafson).
 * **`TP2_Report.pdf`**: Comprehensive report containing speedup curves, Valgrind/Callgrind analysis, and theoretical scaling comparisons.
 * **`ex2_opt.c` / `ex2_orig.c`**: Solution odes for ex2.
-* **`bench_ex1.c` / `ex1_generic.c`**: Solution codes for ex1.
+* **`bench_ex1.c` / `ex1_generic.c` / `short.c`**: Solution codes for ex1 (short.c was done just to use the accumulator with different type than the number that were short to have logical output of the sum).
 * **`ex3.c`**: Solution odes for ex3.
 * **`ex4.c`**: Solution odes for ex4.
 ---
