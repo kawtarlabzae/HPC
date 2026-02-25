@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# Compile the C code (using -lm to link the math library for fabs)
 echo "Compiling..."
 mpicc -o matrixMul ex4.c -lm
 
 # Matrix size to test (Make it large enough so the CPU actually has to work)
 N=4000
 
-# Create a CSV file and write the header
 echo "Processes,Speedup,Efficiency" > results.csv
 
 echo "Starting tests for Matrix Size: $N"
