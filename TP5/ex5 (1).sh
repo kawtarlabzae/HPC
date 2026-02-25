@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Compile the C code
-echo "Compiling ex5.c..."
+
 mpicc -o pi_approxi ex5.c -lm
 
 # Set iterations to 1 Billion
