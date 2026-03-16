@@ -1,0 +1,61 @@
+# ================================================================
+# TP7 - Exercise 2: Poisson Equation Solver (Jacobi + MPI)
+# Usage: make
+# Note: --use-hwthread-cpus tells OpenMPI to count all logical
+#       cores (hyperthreads), not just physical cores.
+# ================================================================
+
+CC       = mpicc
+CFLAGS   = -O2 -Wall -Wextra
+LDFLAGS  = -lm
+TARGET   = poisson
+SRC      = poisson_mpi.c
+MPIFLAGS = --use-hwthread-cpus
+
+.PHONY: all clean
+
+all: $(TARGET)
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 1: 1 process -- serial reference"
+	@echo " Purpose: baseline result to verify numerical correctness"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 1 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 2: 4 processes -- 2x2 topology, default 12x10 grid"
+	@echo " Purpose: main TP run, check topology, neighbors, output"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 4 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 3: 2 processes -- 2x1 topology, default 12x10 grid"
+	@echo " Purpose: confirm identical result with different core count"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 2 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 4: 4 processes -- larger 100x100 grid"
+	@echo " Purpose: measure performance on a bigger domain"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 4 ./$(TARGET) 100 100
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 5: Speedup test -- 400x400 grid, 1 to 8 real cores"
+	@echo " Purpose: compute true speedup S(n)=T(1)/T(n) and E=S/n"
+	@echo "========================================================"
+	@for n in 1 2 4 8; do \
+		echo ""; \
+		echo "  --> $$n process(es):"; \
+		mpirun $(MPIFLAGS) -n $$n ./$(TARGET) 400 400 2>&1 | grep -E "Converged|NOT|Topology|Domain"; \
+	done
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+
+clean:
+	rm -f $(TARGET)

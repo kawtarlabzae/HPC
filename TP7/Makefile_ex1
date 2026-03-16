@@ -1,0 +1,57 @@
+# ================================================================
+# TP7 - Exercise 1: Conway's Game of Life
+# Usage: make
+# Note: --use-hwthread-cpus tells OpenMPI to count all logical
+#       cores (hyperthreads), not just physical cores.
+# ================================================================
+
+CC       = mpicc
+CFLAGS   = -O2 -Wall -Wextra
+TARGET   = game_of_life
+SRC      = game_of_life_mpi.c
+MPIFLAGS = --use-hwthread-cpus
+
+.PHONY: all clean
+
+all: $(TARGET)
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 1: 4 processes -- 2x2 topology"
+	@echo " Grid: 12x12 cells, 10 generations"
+	@echo " Purpose: main TP run, check topology and neighbor ranks"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 4 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 2: 1 process -- serial reference (no communication)"
+	@echo " Purpose: verify correctness vs parallel runs"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 1 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 3: 2 processes -- 2x1 topology"
+	@echo " Purpose: show how MPI_Dims_create handles 2 processes"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 2 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 4: 8 processes -- 4x2 topology (all logical cores)"
+	@echo " Purpose: full utilisation of available hardware"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 8 ./$(TARGET)
+
+	@echo ""
+	@echo "========================================================"
+	@echo " Run 5: 4 processes -- larger 30x30 grid, 20 generations"
+	@echo " Purpose: show scalability with a bigger domain"
+	@echo "========================================================"
+	mpirun $(MPIFLAGS) -n 4 ./$(TARGET) 30 30 20
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) -o $@ $<
+
+clean:
+	rm -f $(TARGET)
