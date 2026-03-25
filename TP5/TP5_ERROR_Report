@@ -1,2 +1,0 @@
-A simple error was done in exercice 2, it needed to have scanf(&value) instead of giving it a static value in the code.
-Sorry for this!
